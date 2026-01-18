@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents, useMap, GeoJSON } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import { californiaBoundary } from "@/data/california-boundary";
 
 // Fix for default marker icons in Next.js
 const customIcon = new L.Icon({
@@ -111,6 +112,18 @@ export default function MapComponent({
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+
+      {/* California state boundary */}
+      <GeoJSON
+        data={californiaBoundary}
+        style={{
+          color: "#6366f1",
+          weight: 3,
+          opacity: 0.8,
+          fillColor: "#818cf8",
+          fillOpacity: 0.1,
+        }}
       />
 
       <FitBounds />
