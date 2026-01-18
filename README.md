@@ -1,142 +1,253 @@
-# California Housing Price Prediction - Machine Learning Project
+# 🏠 California Housing Price Predictor
 
-## 📋 Project Overview
+An interactive machine learning web application that predicts California housing prices based on location. Click anywhere on the map to get instant price predictions powered by a Random Forest model trained on the 1990 California Census housing data.
 
-This is my first end-to-end machine learning project that predicts median house values in California districts based on various features. The project follows a complete machine learning workflow from data acquisition to model deployment.
-
-## 🎯 Project Goal
-
-To build a predictive model that can accurately estimate median house prices in California based on features like location, income, population, and housing characteristics.
-
-## 📊 Dataset
-
-The dataset contains information from the 1990 California census with the following features:
-
-### Features:
-- **longitude**: Longitudinal coordinate
-- **latitude**: Latitudinal coordinate  
-- **housing_median_age**: Median age of houses in the district
-- **total_rooms**: Total number of rooms in the district
-- **total_bedrooms**: Total number of bedrooms in the district
-- **population**: Population in the district
-- **households**: Number of households in the district
-- **median_income**: Median income of households (in tens of thousands)
-- **ocean_proximity**: Proximity to the ocean (categorical)
-
-### Target Variable:
-- **median_house_value**: Median house value for the district (in USD)
-
-## 🛠️ Technologies Used
-
-- **Python 3.7+**
-- **NumPy** - Numerical computations
-- **Pandas** - Data manipulation and analysis
-- **Scikit-learn** - Machine learning algorithms and utilities
-- **Matplotlib** - Data visualization
-- **Joblib** - Model serialization
-- **SciPy** - Statistical functions
-
-## 📁 Project Structure
-
-```
-california-housing-project/
-│
-├── california_housing_project.py  # Main project file
-├── requirements.txt               # Dependencies
-├── california_housing_model.pkl   # Trained model (generated)
-├── datasets/                      # Data directory (auto-created)
-│   └── housing/                   # Housing dataset
-│       └── housing.csv           # Raw data
-└── README.md                     # This file
-```
-
-## 🚀 Installation & Setup
-
-1. **Clone or download the project files**
-2. **Create a virtual environment** (recommended):
-   ```bash
-   python -m venv myenv
-   source myenv/bin/activate  # On Windows: myenv\Scripts\activate
-   ```
-
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Run the project**:
-   ```bash
-   python california_housing_project.py
-   ```
-
-## ⚙️ How It Works
-
-### 1. Data Loading & Exploration
-- Automatically downloads the dataset if not present
-- Performs exploratory data analysis
-- Displays data statistics and distributions
-
-### 2. Data Preprocessing
-- Handles missing values using median imputation
-- Scales numerical features using StandardScaler
-- Encodes categorical variables using OneHotEncoder
-- Creates stratified train-test split
-
-### 3. Model Training
-- Uses Random Forest Regressor as the main algorithm
-- Implements a complete pipeline for preprocessing and modeling
-- Trains on 80% of the data (16,512 samples)
-
-### 4. Model Evaluation
-- Tests on 20% of the data (4,128 samples)
-- Calculates Root Mean Squared Error (RMSE)
-- Saves the trained model for future use
-
-### 5. Model Deployment
-- Serializes the trained model using Joblib
-- Demonstrates loading and using the saved model
-
-## 📈 Results
-
-The model achieves a competitive RMSE (Root Mean Squared Error) on the test set, demonstrating good predictive performance for housing price estimation.
-
-## 🎓 Key Learnings
-
-This project helped me understand:
-
-- **End-to-end ML workflow**: From data acquisition to model deployment
-- **Data preprocessing**: Handling missing values, scaling, encoding
-- **Model selection**: Choosing appropriate algorithms for regression tasks
-- **Evaluation metrics**: Using RMSE for regression problems
-- **Model persistence**: Saving and loading trained models
-- **Best practices**: Code organization and documentation
-
-## 🔮 Future Improvements
-
-- [ ] Hyperparameter tuning with GridSearchCV/RandomizedSearchCV
-- [ ] Feature engineering (creating new features like rooms per household)
-- [ ] Experiment with different algorithms (XGBoost, Neural Networks)
-- [ ] Create a web interface for predictions
-- [ ] Add more visualization and analysis
-- [ ] Implement model monitoring and retraining
-
-## 📚 Resources
-
-- [Scikit-learn Documentation](https://scikit-learn.org/stable/)
-- [Hands-On Machine Learning with Scikit-Learn, Keras & TensorFlow](https://www.oreilly.com/library/view/hands-on-machine-learning/9781492032632/)
-- [California Housing Dataset](https://www.kaggle.com/datasets/camnugent/california-housing-prices)
-
-## 👨‍💻 Author
-
-**Aditya Kulkarni**  
-- First machine learning project
-- Learning data science and ML fundamentals
-- Open to feedback and collaboration
-
-## 📄 License
-
-This project is for educational purposes. Feel free to use and modify as needed.
+![ML-Powered](https://img.shields.io/badge/ML-Random%20Forest-green)
+![Backend](https://img.shields.io/badge/Backend-FastAPI-009688)
+![Frontend](https://img.shields.io/badge/Frontend-Next.js%2016-black)
+![Map](https://img.shields.io/badge/Map-Leaflet-199900)
 
 ---
 
-**Note**: This is my first machine learning project! I'm excited to continue learning and improving my skills in data science and machine learning. Feedback and suggestions are always welcome! 🚀
+## ✨ Features
+
+- 🗺️ **Interactive Map** - Click anywhere on California to get predictions
+- 🤖 **ML-Powered** - Random Forest Regressor trained on 20,640+ samples
+- ⚡ **Real-time API** - FastAPI backend with ~50ms response times
+- 🎨 **Modern UI** - Glassmorphism design with animated gradients
+- 📍 **California Boundary** - Accurate state outline overlay
+- ⚙️ **Adjustable Parameters** - Customize income and housing age inputs
+
+---
+
+## 🏗️ Project Structure
+
+```
+AI-ML/
+├── 📁 housing-app/              # Next.js Frontend
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx         # Main application page
+│   │   │   ├── layout.tsx       # Root layout with metadata
+│   │   │   └── globals.css      # Tailwind & custom styles
+│   │   ├── components/
+│   │   │   ├── CaliforniaMap.tsx    # Map wrapper with SSR handling
+│   │   │   ├── MapComponent.tsx     # Leaflet map with markers
+│   │   │   ├── PredictionCard.tsx   # Price prediction display
+│   │   │   └── InputPanel.tsx       # Settings panel
+│   │   └── data/
+│   │       └── california-boundary.ts  # State GeoJSON boundary
+│   └── package.json
+│
+├── 📁 datasets/                  # Training data
+│   ├── housing.tgz              # Original dataset archive
+│   └── housing/
+│       └── housing.csv          # California housing data
+│
+├── 🐍 api.py                     # FastAPI backend server
+├── 🐍 final.py                   # ML model training script
+├── 🧠 california_housing_model.pkl  # Trained model (~145MB)
+├── 📋 requirements.txt           # Python dependencies
+└── 📖 README.md
+```
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+- Python 3.7+
+- Node.js 18+
+- npm or yarn
+
+### 1️⃣ Clone & Setup Backend
+
+```bash
+# Clone the repository
+git clone <your-repo-url>
+cd AI-ML
+
+# Create virtual environment
+python -m venv venv
+
+# Activate (Windows)
+.\venv\Scripts\activate
+# Activate (macOS/Linux)
+source venv/bin/activate
+
+# Install Python dependencies
+pip install -r requirements.txt
+```
+
+### 2️⃣ Train the Model (if not exists)
+
+```bash
+python final.py
+```
+
+This will:
+- Download the California housing dataset
+- Split data into train/test sets (80/20)
+- Train a Random Forest Regressor
+- Save the model as `california_housing_model.pkl`
+- Display RMSE on test set (~$49,000)
+
+### 3️⃣ Start the API Server
+
+```bash
+uvicorn api:app --reload --host 0.0.0.0 --port 8000
+```
+
+API will be available at: `http://localhost:8000`
+
+### 4️⃣ Setup & Run Frontend
+
+```bash
+cd housing-app
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Frontend will be available at: `http://localhost:3000`
+
+---
+
+## 📡 API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/` | API status & health check |
+| GET | `/health` | Health check endpoint |
+| POST | `/predict` | Get housing price prediction |
+| GET | `/model-info` | Model information & features |
+
+### Prediction Request
+
+```bash
+curl -X POST "http://localhost:8000/predict" \
+     -H "Content-Type: application/json" \
+     -d '{
+       "latitude": 37.7749,
+       "longitude": -122.4194,
+       "median_income": 5.0,
+       "housing_median_age": 30
+     }'
+```
+
+### Response
+
+```json
+{
+  "predicted_price": 358542.50,
+  "formatted_price": "$358,543",
+  "latitude": 37.7749,
+  "longitude": -122.4194,
+  "location_description": "San Francisco"
+}
+```
+
+---
+
+## 🧠 Machine Learning Model
+
+### Algorithm
+**Random Forest Regressor** with default hyperparameters
+
+### Features Used
+| Feature | Description |
+|---------|-------------|
+| `longitude` | Geographic longitude |
+| `latitude` | Geographic latitude |
+| `housing_median_age` | Median age of houses in the area |
+| `total_rooms` | Total rooms in the block |
+| `total_bedrooms` | Total bedrooms in the block |
+| `population` | Population in the block |
+| `households` | Number of households |
+| `median_income` | Median income (in $10,000s) |
+| `ocean_proximity` | Categorical: INLAND, NEAR BAY, NEAR OCEAN, <1H OCEAN, ISLAND |
+
+### Dataset
+- **Source**: California Housing dataset (1990 Census)
+- **Samples**: 20,640 districts
+- **Target**: Median house value ($14,999 - $500,001)
+
+### Pipeline
+1. **Numerical Features**: SimpleImputer (median) → StandardScaler
+2. **Categorical Features**: SimpleImputer (most_frequent) → OneHotEncoder
+3. **Model**: RandomForestRegressor
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **FastAPI** - High-performance async Python web framework
+- **Pydantic** - Data validation using Python type hints
+- **Uvicorn** - ASGI server
+- **scikit-learn** - Machine learning library
+- **joblib** - Model serialization
+
+### Frontend
+- **Next.js 16** - React framework with App Router
+- **React 19** - UI library
+- **Tailwind CSS 4** - Utility-first CSS
+- **Leaflet** - Interactive maps
+- **react-leaflet** - React components for Leaflet
+
+---
+
+## 🌐 Environment Variables
+
+### Frontend (housing-app/.env.local)
+
+```env
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
+
+---
+
+## 📊 Model Performance
+
+| Metric | Value |
+|--------|-------|
+| Training Samples | 16,512 (80%) |
+| Test Samples | 4,128 (20%) |
+| Test RMSE | ~$49,000 |
+| Prediction Range | $14,999 - $500,001 |
+
+---
+
+## 🎨 UI Features
+
+- **Glassmorphism** - Frosted glass effect cards
+- **Animated Gradients** - Dynamic background animations
+- **Floating Particles** - Subtle animated background elements
+- **Responsive Design** - Works on mobile, tablet, and desktop
+- **Dark Theme** - Easy on the eyes
+- **California Boundary** - GeoJSON state outline
+
+---
+
+## 📝 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 🙏 Acknowledgments
+
+- Dataset from [Aurélien Géron's ML Book](https://github.com/ageron/handson-ml2)
+- Map tiles from [OpenStreetMap](https://www.openstreetmap.org/)
+
+---
+
+<div align="center">
+
+**Built with ❤️ for Hackathons**
+
+</div>
