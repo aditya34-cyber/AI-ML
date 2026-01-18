@@ -1,0 +1,5 @@
+datasets
+venv
+.env
+__pycache__
+california_housing_model.pkl
